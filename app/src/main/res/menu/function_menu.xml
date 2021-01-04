@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/teacher_management"
+            android:icon="@drawable/manage"
+            android:title="Quản lý giảng viên"/>
+
+        <item
+            android:id="@+id/register_room"
+            android:icon="@drawable/register"
+            android:title="Đăng ký phòng học"/>
+
+
+
+    </group>
+</menu>

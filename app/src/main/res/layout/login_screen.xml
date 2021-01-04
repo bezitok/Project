@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#6FC17A"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/teacher"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký phòng học"
+        android:textAllCaps="true"
+        android:fontFamily="@font/pacificoregular"
+        android:textStyle="bold"
+        android:textColor="#FF006826"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp"
+        >
+
+        <EditText
+            android:id="@+id/edt_user"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/user"
+            android:paddingLeft="15dp"
+            android:drawablePadding="15dp"
+            android:background="@drawable/circle_edittext"/>
+
+        <EditText
+            android:id="@+id/edt_pass"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:drawableLeft="@drawable/pass"
+            android:drawablePadding="15dp"
+            android:paddingLeft="15dp"
+            android:inputType="textPassword"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/circle_edittext"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập"
+        android:layout_gravity="center"
+        android:fontFamily="@font/baloo"
+        android:background="@drawable/circle_button"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="#FF006826"
+        android:layout_marginTop="20sp"
+        android:onClick="Login"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/dangki"
+        android:textColor="#000"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/baloo"
+        android:onClick="Register"/>
+
+</LinearLayout>
+
