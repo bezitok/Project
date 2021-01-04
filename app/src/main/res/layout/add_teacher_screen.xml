@@ -19,7 +19,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tpedt_teacher_fullname"
+            android:id="@+id/tpedt_teacher_fullname_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nhập tên giảng viên"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tpedt_teacher_dob"
+            android:id="@+id/tpedt_teacher_dob_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ngày/tháng/năm sinh"
@@ -47,7 +47,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
-        android:id="@+id/rdg_teacher_gender"
+        android:id="@+id/rdg_teacher_gender_edit"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -70,7 +70,7 @@
     </RadioGroup>
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spn_teacher_department"
+        android:id="@+id/spn_teacher_department_edit"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"

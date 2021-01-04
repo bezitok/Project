@@ -1,8 +1,11 @@
 package com.example.dangkyphonghoc.dto;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Teacher_DTO {
+public class Teacher_DTO implements Parcelable {
 
     public int id_teacher;
     public int avt_teacher;
@@ -28,6 +31,27 @@ public class Teacher_DTO {
 
     public Teacher_DTO() {
     }
+
+    protected Teacher_DTO(Parcel in) {
+        id_teacher = in.readInt();
+        avt_teacher = in.readInt();
+        fullname_teacher = in.readString();
+        dob_teacher = in.readString();
+        gender_teacher = in.readString();
+        department_teacher = in.readString();
+    }
+
+    public static final Creator<Teacher_DTO> CREATOR = new Creator<Teacher_DTO>() {
+        @Override
+        public Teacher_DTO createFromParcel(Parcel in) {
+            return new Teacher_DTO(in);
+        }
+
+        @Override
+        public Teacher_DTO[] newArray(int size) {
+            return new Teacher_DTO[size];
+        }
+    };
 
     public int getId_teacher() {
         return id_teacher;
@@ -75,5 +99,20 @@ public class Teacher_DTO {
 
     public void setDepartment_teacher(String department_teacher) {
         this.department_teacher = department_teacher;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id_teacher);
+        parcel.writeInt(avt_teacher);
+        parcel.writeString(fullname_teacher);
+        parcel.writeString(dob_teacher);
+        parcel.writeString(gender_teacher);
+        parcel.writeString(department_teacher);
     }
 }

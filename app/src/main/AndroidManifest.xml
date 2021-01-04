@@ -20,6 +20,7 @@
         <activity android:name=".activities.Home_Screen"
             android:theme="@style/Theme.Design.NoActionBar"/>
         <activity android:name=".activities.Add_Teacher_Screen" />
+        <activity android:name=".activities.Edit_Teacher_Screen" />
         <activity android:name=".activities.Sign_Screen" />
     </application>
 

@@ -1,15 +1,13 @@
 package com.example.dangkyphonghoc.fragment;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -47,12 +45,12 @@ public class Add_Teacher_Fragment extends Fragment {
         teacher_dao = new Teacher_DAO(getActivity());
 
         btn_add_teacher = add_teacher_fragment.findViewById(R.id.btn_add_teacher);
-        tpedt_teacherFullname = add_teacher_fragment.findViewById(R.id.tpedt_teacher_fullname);
-        tpedt_teacherDOB = add_teacher_fragment.findViewById(R.id.tpedt_teacher_dob);
-        rdg_teacher_gender = add_teacher_fragment.findViewById(R.id.rdg_teacher_gender);
+        tpedt_teacherFullname = add_teacher_fragment.findViewById(R.id.tpedt_teacher_fullname_edit);
+        tpedt_teacherDOB = add_teacher_fragment.findViewById(R.id.tpedt_teacher_dob_edit);
+        rdg_teacher_gender = add_teacher_fragment.findViewById(R.id.rdg_teacher_gender_edit);
         rdb_male_teacher = add_teacher_fragment.findViewById(R.id.rdb_male_teacher);
         rdb_female_teacher = add_teacher_fragment.findViewById(R.id.rdb_female_teacher);
-        spn_teacher_department = add_teacher_fragment.findViewById(R.id.spn_teacher_department);
+        spn_teacher_department = add_teacher_fragment.findViewById(R.id.spn_teacher_department_edit);
 
         btn_add_teacher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +66,11 @@ public class Add_Teacher_Fragment extends Fragment {
 
                 Teacher_DTO teacher_dto = new Teacher_DTO(teacher_fullname, teacher_dob, teacher_gender, teacher_department);
                 teacher_dao.addTeacher(teacher_dto);
+
                 Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(),Home_Screen.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
