@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.dangkyphonghoc.R;
 import com.example.dangkyphonghoc.fragment.Add_Teacher_Fragment;
 import com.example.dangkyphonghoc.fragment.Room_Management_Fragment;
+import com.example.dangkyphonghoc.fragment.Setting_Fragment;
 import com.example.dangkyphonghoc.fragment.Teacher_Management_Fragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -35,11 +37,14 @@ public class Home_Screen extends AppCompatActivity implements NavigationView.OnN
     FragmentManager fragmentManager;
 
 
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
+
+
 
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.home_screen);
@@ -89,6 +94,12 @@ public class Home_Screen extends AppCompatActivity implements NavigationView.OnN
                 fragmentTransaction1.commit();
                 drawerLayout.closeDrawers();
                 break;
+            case R.id.setting:
+                Setting_Fragment setting_fragment = new Setting_Fragment();
+                FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+                fragmentTransaction2.replace(R.id.content_layout, setting_fragment);
+                fragmentTransaction2.commit();
+                drawerLayout.closeDrawers();
         }
         return false;
     }

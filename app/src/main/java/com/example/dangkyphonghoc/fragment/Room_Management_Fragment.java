@@ -1,5 +1,7 @@
 package com.example.dangkyphonghoc.fragment;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.dangkyphonghoc.R;
@@ -28,6 +31,11 @@ public class Room_Management_Fragment extends Fragment  {
     List<Room_DTO> room_dtoList;
     GridView gv_room_management;
     Room_Management_Adapter adapter;
+    public static int REQUEST_CODE = 1;
+    public static String ROOM_NAME = "ROOM_NAME";
+    String teacherName = "";
+    String teacherDepartment = "";
+    Room_DTO room_dto ;
 
     @Nullable
     @Override
@@ -38,7 +46,8 @@ public class Room_Management_Fragment extends Fragment  {
         ((Home_Screen)getActivity()).getSupportActionBar().setTitle(R.string.room_management);
         gv_room_management = room_management_fragment.findViewById(R.id.gdv_room_manager);
         room_dao = new Room_DAO(getActivity());
-        room_dtoList = room_dao.getAllTableInfo();
+        room_dtoList = room_dao.getAllRoom();
+
 
         displayRoom();
 
@@ -46,21 +55,58 @@ public class Room_Management_Fragment extends Fragment  {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), Register_Room_Screen.class);
-                startActivity(intent);
+                intent.putExtra(ROOM_NAME, room_dtoList.get(position).getName_room());
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
+        gv_room_management.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                room_dto = room_dtoList.get(position);
+                if(room_dto.isRegiste_status()==false){
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Trạng thái đăng ký phòng")
+                            .setMessage("Phòng chưa được đăng ký bởi giáo viên nào")
+                            .create()
+                            .show();
+                }else{
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Trạng thái đăng ký phòng")
+                            .setMessage("Phòng được đăng ký" + "\n" + "Giảng viên: " + teacherName + "\n" + "Bộ môn: " + teacherDepartment)
+                            .create()
+                            .show();
+                }
+                return false;
+            }
+        });
+
+
 
         return room_management_fragment;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            teacherName =data.getStringExtra(Register_Room_Screen.TEACHER_NAME);
+            teacherDepartment = data.getStringExtra(Register_Room_Screen.TEACHER_DEPARTMENT);
+            room_dto = data.getParcelableExtra(Register_Room_Screen.ROOM);
+            room_dao.updateRegisterStatus(room_dto);
+            room_dtoList.clear();
+            room_dtoList = room_dao.getAllRoom();
+            int a = 0;
+        }
+    }
+
     public void displayRoom(){
-        room_dtoList.clear();
-        if(room_dao.getAllTableInfo().size()==0){
+        if(room_dao.getAllRoom().size()==0){
             room_dao.addRoom();
-            room_dao.getAllTableInfo();
+            room_dao.getAllRoom();
         }else {
-            room_dao.getAllTableInfo();
-            room_dtoList = room_dao.getAllTableInfo();
+            room_dao.getAllRoom();
+            room_dtoList = room_dao.getAllRoom();
         }
         adapter = new Room_Management_Adapter(getActivity(), R.layout.a_room_layout, room_dtoList);
         gv_room_management.setAdapter(adapter);

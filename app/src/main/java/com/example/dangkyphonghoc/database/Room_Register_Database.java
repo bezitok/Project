@@ -27,6 +27,7 @@ public class Room_Register_Database extends SQLiteOpenHelper {
     public static final String TBL_ROOM_ID = "ID_ROOM";
     public static final String TBL_ROOM_NAME = "ROOM_NAME";
     public static final String TBL_ROOM_SELECTED = "ROOM_SELECTED";
+    public static final String TBL_ROOM_REGISTE_STATUS = "REGISTE_STATUS";
 
     String sqlCreateAccountTable = "Create table " + TBL_ACCOUNT + " ( "
             + TBL_ACCOUNT_ID + " integer primary key, "
@@ -43,7 +44,8 @@ public class Room_Register_Database extends SQLiteOpenHelper {
     String sqlCreateRoomTable = "Create table " + TBL_ROOM + " ( " +
             TBL_ROOM_ID + " integer primary key, " +
             TBL_ROOM_NAME + " text, " +
-            TBL_ROOM_SELECTED + " text " + " ) ";
+            TBL_ROOM_SELECTED + " text, " +
+            TBL_ROOM_REGISTE_STATUS + " text " + " ) ";
 
 
     public Room_Register_Database(Context context) {

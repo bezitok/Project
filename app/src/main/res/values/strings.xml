@@ -13,4 +13,6 @@
     <string name="department">Bộ môn</string>
     <string name="room_manament_title">Quản lý phòng học</string>
     <string name="register_room">Đăng ký phòng học</string>
+    <string name="switch_darkmode">Chế độ tối</string>
+    <string name="switch_language">Ngôn ngữ Anh - Việt</string>
 </resources>

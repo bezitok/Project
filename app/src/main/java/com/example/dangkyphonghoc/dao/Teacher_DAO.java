@@ -129,32 +129,6 @@ public class Teacher_DAO {
             return listTeacherName;
     }
 
-//    public String getDepartmentByName(String name){
-//        String departmentName = "";
-//        sqLiteDatabase = database.getReadableDatabase();
-//        Cursor cursor = sqLiteDatabase.query(Room_Register_Database.TBL_TEACHER, new String[]
-//                        { Room_Register_Database.TBL_TEACHER_ID, Room_Register_Database.TBL_TEACHER_FULLNAME,
-//                                Room_Register_Database.TBL_TEACHER_DOB, Room_Register_Database.TBL_TEACHER_GENDER,
-//                                Room_Register_Database.TBL_TEACHER_DEPARTMENT},
-//                Room_Register_Database.TBL_TEACHER_DEPARTMENT + " = ? ",
-//                new String[] {String.valueOf(name)}, null, null, null, null);
-//        if (cursor != null){
-//            cursor.moveToFirst();
-//        }
-//
-//        while (!cursor.isAfterLast()){
-//            Teacher_DTO teacher_dto = new Teacher_DTO();
-//
-//
-//            teacher_dto.setDepartment_teacher(cursor.getString(cursor.getColumnIndex(Room_Register_Database.TBL_TEACHER_DEPARTMENT)));
-//
-//            departmentName = teacher_dto.getDepartment_teacher();
-//
-//            cursor.moveToNext();
-//        }
-//        return departmentName;
-//    }
-
     public HashMap<String, String> getDEpartmentByName(){
         sqLiteDatabase = database.getReadableDatabase();
         List<Teacher_DTO> list = getAllTeacher();

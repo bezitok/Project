@@ -14,7 +14,7 @@ import com.example.dangkyphonghoc.dto.Room_DTO;
 
 import java.util.List;
 
-public class Room_Management_Adapter extends BaseAdapter implements View.OnClickListener{
+public class Room_Management_Adapter extends BaseAdapter {
 
     Context context;
     int layout;
@@ -39,8 +39,9 @@ public class Room_Management_Adapter extends BaseAdapter implements View.OnClick
 
     @Override
     public long getItemId(int position) {
-        return list.get(position).getId_room();
+        return 0;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -65,23 +66,23 @@ public class Room_Management_Adapter extends BaseAdapter implements View.OnClick
         Room_DTO room_dto = list.get(position);
         viewHolder.a_room_name.setText(room_dto.getName_room());
         viewHolder.a_room_img.setTag(position);
-        viewHolder.a_room_img.setOnClickListener(this);
+
 
         return convertView;
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        viewHolder = (ViewHolder) ((View) v.getParent()).getTag();
-        switch (id) {
-            case R.id.a_room_img:
-                int pos = (int) v.getTag();
-                list.get(pos).setRoom_Selected(true);
-//                displayPopupRegister();
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//        int id = v.getId();
+//        viewHolder = (ViewHolder) ((View) v.getParent()).getTag();
+//        switch (id) {
+//            case R.id.a_room_img:
+//                int pos = (int) v.getTag();
+//                list.get(pos).setRoom_Selected(true);
+////                displayPopupRegister();
+//                break;
+//        }
+//    }
 
     public class ViewHolder{
         ImageView a_room_img;
