@@ -9,6 +9,7 @@ import com.example.dangkyphonghoc.database.Room_Register_Database;
 import com.example.dangkyphonghoc.dto.Teacher_DTO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Teacher_DAO {
@@ -94,5 +95,73 @@ public class Teacher_DAO {
         sqLiteDatabase.update(Room_Register_Database.TBL_TEACHER, contentValues,
                 Room_Register_Database.TBL_TEACHER_ID
                         + "=" + teacher.getId_teacher(), null);
+    }
+
+//    public HashMap<Integer, String> getAllTeacherName (){
+//        sqLiteDatabase = database.getReadableDatabase();
+//        List<Teacher_DTO> list = getAllTeacher();
+//        HashMap<Integer, String> mapTeacherName = new HashMap<>();
+//        for (Teacher_DTO teacher_dto : list) {
+//            mapTeacherName.put(teacher_dto.getId_teacher(), teacher_dto.getFullname_teacher());
+//        }
+//        return mapTeacherName;
+//    }
+
+    public List<String> getAllTeacherName(){
+            sqLiteDatabase = database.getWritableDatabase();
+            sqLiteDatabase = database.getReadableDatabase();
+            List<String> listTeacherName = new ArrayList<>();
+            String sql = "Select " + Room_Register_Database.TBL_TEACHER_FULLNAME + " from " + Room_Register_Database.TBL_TEACHER;
+            Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()){
+                Teacher_DTO teacher_dto = new Teacher_DTO();
+
+
+                teacher_dto.setFullname_teacher(cursor.getString(cursor.getColumnIndex(Room_Register_Database.TBL_TEACHER_FULLNAME)));
+
+                String name = teacher_dto.getFullname_teacher();
+
+                listTeacherName.add(name);
+                cursor.moveToNext();
+            }
+            return listTeacherName;
+    }
+
+//    public String getDepartmentByName(String name){
+//        String departmentName = "";
+//        sqLiteDatabase = database.getReadableDatabase();
+//        Cursor cursor = sqLiteDatabase.query(Room_Register_Database.TBL_TEACHER, new String[]
+//                        { Room_Register_Database.TBL_TEACHER_ID, Room_Register_Database.TBL_TEACHER_FULLNAME,
+//                                Room_Register_Database.TBL_TEACHER_DOB, Room_Register_Database.TBL_TEACHER_GENDER,
+//                                Room_Register_Database.TBL_TEACHER_DEPARTMENT},
+//                Room_Register_Database.TBL_TEACHER_DEPARTMENT + " = ? ",
+//                new String[] {String.valueOf(name)}, null, null, null, null);
+//        if (cursor != null){
+//            cursor.moveToFirst();
+//        }
+//
+//        while (!cursor.isAfterLast()){
+//            Teacher_DTO teacher_dto = new Teacher_DTO();
+//
+//
+//            teacher_dto.setDepartment_teacher(cursor.getString(cursor.getColumnIndex(Room_Register_Database.TBL_TEACHER_DEPARTMENT)));
+//
+//            departmentName = teacher_dto.getDepartment_teacher();
+//
+//            cursor.moveToNext();
+//        }
+//        return departmentName;
+//    }
+
+    public HashMap<String, String> getDEpartmentByName(){
+        sqLiteDatabase = database.getReadableDatabase();
+        List<Teacher_DTO> list = getAllTeacher();
+        HashMap<String, String> mapTeacherDepartment = new HashMap<>();
+        for (Teacher_DTO teacher_dto : list) {
+            mapTeacherDepartment.put(teacher_dto.getFullname_teacher(), teacher_dto.getDepartment_teacher());
+        }
+        return mapTeacherDepartment;
     }
 }

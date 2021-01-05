@@ -8,7 +8,7 @@
             android:title="Quản lý giảng viên"/>
 
         <item
-            android:id="@+id/register_room"
+            android:id="@+id/room_management"
             android:icon="@drawable/register"
             android:title="Đăng ký phòng học"/>
 

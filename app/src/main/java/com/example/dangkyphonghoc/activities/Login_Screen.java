@@ -52,13 +52,13 @@ public class Login_Screen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(Login_Screen.this);
-            builder.setCancelable(false);
-            builder.setTitle("Alert");
-            builder.setMessage("Username or password is incorrect. Please try again.");
-            builder.setPositiveButton("OK", null);
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(Login_Screen.this);
+                builder.setCancelable(false);
+                builder.setTitle("Alert");
+                builder.setMessage("Username or password is incorrect. Please try again.");
+                builder.setPositiveButton("OK", null);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
         }
         }
     }

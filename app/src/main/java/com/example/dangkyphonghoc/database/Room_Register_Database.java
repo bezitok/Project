@@ -23,6 +23,11 @@ public class Room_Register_Database extends SQLiteOpenHelper {
     public static final String TBL_TEACHER_GENDER = "GENDER_TEACHER";
     public static final String TBL_TEACHER_DEPARTMENT = "DEPARTMENT_TEACHER";
 
+    public static final String TBL_ROOM = "ROOM";
+    public static final String TBL_ROOM_ID = "ID_ROOM";
+    public static final String TBL_ROOM_NAME = "ROOM_NAME";
+    public static final String TBL_ROOM_SELECTED = "ROOM_SELECTED";
+
     String sqlCreateAccountTable = "Create table " + TBL_ACCOUNT + " ( "
             + TBL_ACCOUNT_ID + " integer primary key, "
             + TBL_ACCOUNT_USERNAME + " text, "
@@ -35,6 +40,11 @@ public class Room_Register_Database extends SQLiteOpenHelper {
             + TBL_TEACHER_GENDER + " text, "
             + TBL_TEACHER_DEPARTMENT + " text " + " ) ";
 
+    String sqlCreateRoomTable = "Create table " + TBL_ROOM + " ( " +
+            TBL_ROOM_ID + " integer primary key, " +
+            TBL_ROOM_NAME + " text, " +
+            TBL_ROOM_SELECTED + " text " + " ) ";
+
 
     public Room_Register_Database(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -44,12 +54,14 @@ public class Room_Register_Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(sqlCreateAccountTable);
         sqLiteDatabase.execSQL(sqlCreateTeacherTable);
+        sqLiteDatabase.execSQL(sqlCreateRoomTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("Drop table if exists " + TBL_ACCOUNT);
         sqLiteDatabase.execSQL("Drop table if exists " + TBL_TEACHER);
+        sqLiteDatabase.execSQL("Drop table if exists " + TBL_ROOM);
         onCreate(sqLiteDatabase);
     }
 

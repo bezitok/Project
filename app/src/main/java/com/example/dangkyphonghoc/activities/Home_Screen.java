@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dangkyphonghoc.R;
 import com.example.dangkyphonghoc.fragment.Add_Teacher_Fragment;
+import com.example.dangkyphonghoc.fragment.Room_Management_Fragment;
 import com.example.dangkyphonghoc.fragment.Teacher_Management_Fragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -61,7 +62,7 @@ public class Home_Screen extends AppCompatActivity implements NavigationView.OnN
 
         Intent intent = getIntent();
         String userName = intent.getStringExtra(Login_Screen.USERNAME);
-        txt_user.setText("Staff: " + userName);
+        txt_user.setText("Welcome: " + userName);
 
         fragmentManager = getSupportFragmentManager();
         Teacher_Management_Fragment teacher_management_fragment = new Teacher_Management_Fragment();
@@ -79,6 +80,13 @@ public class Home_Screen extends AppCompatActivity implements NavigationView.OnN
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.content_layout, teacher_management_fragment);
                 fragmentTransaction.commit();
+                drawerLayout.closeDrawers();
+                break;
+            case R.id.room_management:
+                Room_Management_Fragment room_management_fragment = new Room_Management_Fragment();
+                FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
+                fragmentTransaction1.replace(R.id.content_layout, room_management_fragment);
+                fragmentTransaction1.commit();
                 drawerLayout.closeDrawers();
                 break;
         }
