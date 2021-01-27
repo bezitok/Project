@@ -1,5 +1,7 @@
 package com.example.dangkyphonghoc.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -7,9 +9,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentManager;
@@ -17,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dangkyphonghoc.R;
 import com.example.dangkyphonghoc.activities.Add_Teacher_Screen;
+import com.example.dangkyphonghoc.activities.Edit_Teacher_Screen;
 import com.example.dangkyphonghoc.activities.Home_Screen;
 import com.example.dangkyphonghoc.adapter.Teacher_Adapter;
 import com.example.dangkyphonghoc.dao.Teacher_DAO;
@@ -26,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher_Management_Fragment extends Fragment {
-
+    public static final String TEACHER = "TEACHER";
     ListView lv_teacherManagement;
     Teacher_Adapter teacher_adapter;
     FragmentManager fragmentManager;
@@ -45,7 +50,41 @@ public class Teacher_Management_Fragment extends Fragment {
         teacher_dtoList = teacher_dao.getAllTeacher();
         teacher_adapter = new Teacher_Adapter(getActivity(), R.layout.one_teacher, teacher_dtoList);
         lv_teacherManagement.setAdapter(teacher_adapter);
+        lv_teacherManagement.setOnItemClickListener((adapterView, view, position, l) -> {
+            Teacher_DTO teacher = teacher_dtoList.get(position);
+            Intent intent = new Intent(getActivity(), Edit_Teacher_Screen.class);
+            intent.putExtra(TEACHER,teacher);
+            startActivity(intent);
+            getActivity().finish();
+        });
+        lv_teacherManagement.setOnItemLongClickListener((AdapterView.OnItemLongClickListener) (adapterView, view, position, l) -> {
+            Teacher_DTO teacher = teacher_dtoList.get(position);
 
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Warning");
+            builder.setMessage("Xác nhận xóa giảng viên này");
+
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    teacher_dao.deleteTeacher(teacher);
+                    teacher_dtoList.clear();
+                    teacher_dtoList = teacher_dao.getAllTeacher();
+                    teacher_adapter.notifyDataSetChanged();
+                }
+            });
+
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return false;
+        });
         return teacher_management_fragment;
     }
 

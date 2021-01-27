@@ -6,6 +6,7 @@
     <string name="add_teacher">Thêm giảng viên</string>
     <string name="teacher_fragment">Quản lý giảng viên</string>
     <string name="add_teacher_fragment">Đăng kí thông tin giảng viên</string>
+    <string name="edit_teacher_fragment">Sửa thông tin giảng viên</string>
     <string name="register_teacher">Thêm thông tin giảng viên</string>
     <string name="room_management">Quản lý phòng học</string>
     <string name="male_teacher">Nam</string>
